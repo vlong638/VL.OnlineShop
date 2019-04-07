@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.eShopWeb.Infrastructure.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -37,8 +39,26 @@ namespace VL.OnlineShop.WebAPI
                 var xmlPath = Path.Combine(basePath, "VL.OnlineShop.WebAPI.xml");
                 c.IncludeXmlComments(xmlPath);
             });
+
+            //Auth2.0 
+            services.AddIdentity<ApplicationUser, Microsoft.AspNetCore.Identity.IdentityRole>();
+            services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(c=> {
+                    c.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
+                    c.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/logout");
+                    c.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/denied");
+                    c.SlidingExpiration = true;
+                    c.CookieManager = new Microsoft.AspNetCore.Authentication.Cookies.ChunkingCookieManager();
+                    c.Cookie.Name= "vl_access_token";
+                    c.Cookie.HttpOnly = false;
+                });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -52,6 +72,37 @@ namespace VL.OnlineShop.WebAPI
                 app.UseHsts();
             }
 
+            //TODO尚未解析具体的机制
+            app.UseAuthentication();
+            app.Map("/login", builder =>
+            {
+                builder.Run(async context =>
+                {
+                    //测试快捷地址
+                    //https://localhost:44360/login?name=vlong638&password=701616
+                    var name = context.Request.Query["name"];
+                    var password = context.Request.Query["password"];
+                    if (name == "vlong638" && password == "701616")
+                    {
+                        var claims = new List<System.Security.Claims.Claim>() {
+                            new System.Security.Claims.Claim("name",name)
+                        };
+                        var identity = new System.Security.Claims.ClaimsIdentity(claims, "password");
+                        var principal = new System.Security.Claims.ClaimsPrincipal(identity);
+                        //已过时
+                        //await context.Authentication.SignInAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                        await context.SignInAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                    }
+                    else
+                    {
+                        await context.SignOutAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme);
+                    }
+                });
+            });
+            //过时弃用
+            //app.UseCookieAuthentication(CookieAuthMiddleware.GetOptions());
+
+
             app.UseHttpsRedirection();
             app.UseMvc();
 
@@ -62,6 +113,40 @@ namespace VL.OnlineShop.WebAPI
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+        }
+    }
+
+    //过时弃用
+    //public class CookieAuthMiddleware
+    //{
+    //    public static Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions GetOptions()
+    //    {
+    //        var option = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions
+    //        {
+    //            //AutomaticAuthenticate = true,
+    //            //AutomaticChallenge = true,
+    //            LoginPath = new Microsoft.AspNetCore.Http.PathString("/login"),
+    //            LogoutPath = new Microsoft.AspNetCore.Http.PathString("/logout"),
+    //            AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/denied"),
+    //            SlidingExpiration = true,
+    //            CookieManager = new Microsoft.AspNetCore.Authentication.Cookies.ChunkingCookieManager()
+    //        };
+    //        option.Cookie.Name = "wings_access_token";
+    //        option.Cookie.HttpOnly = false;
+    //        return option;
+    //    }
+    //}
+    public static class IdentityExtension
+    {
+        public static string FullName(this System.Security.Principal.IIdentity identity)
+        {
+            var claim = ((System.Security.Claims.ClaimsIdentity)identity).FindFirst("name");
+            return (claim != null) ? claim.Value : string.Empty;
+        }
+        public static string Role(this System.Security.Principal.IIdentity identity)
+        {
+            var claim = ((System.Security.Claims.ClaimsIdentity)identity).FindFirst("role");
+            return (claim != null) ? claim.Value : string.Empty;
         }
     }
 }
