@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using VL.OnlineShop.WebAPI.Authorization;
 
 namespace VL.OnlineShop.WebAPI
 {
@@ -43,15 +44,20 @@ namespace VL.OnlineShop.WebAPI
             //Auth2.0 
             services.AddIdentity<ApplicationUser, Microsoft.AspNetCore.Identity.IdentityRole>();
             services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(c=> {
-                    c.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
-                    c.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/logout");
-                    c.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/denied");
-                    c.SlidingExpiration = true;
-                    c.CookieManager = new Microsoft.AspNetCore.Authentication.Cookies.ChunkingCookieManager();
-                    c.Cookie.Name= "vl_access_token";
-                    c.Cookie.HttpOnly = false;
+                .AddCookie(schema =>
+                {
+                    schema.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
+                    schema.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/logout");
+                    schema.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/denied");
+                    schema.SlidingExpiration = true;
+                    schema.CookieManager = new Microsoft.AspNetCore.Authentication.Cookies.ChunkingCookieManager();
+                    schema.Cookie.Name = "vl_access_token";
+                    schema.Cookie.HttpOnly = false;
                 });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Over16", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
+            });
         }
 
         /// <summary>
