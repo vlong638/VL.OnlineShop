@@ -1,0 +1,9 @@
+H:\WorkSpace\Projects\HuntTrip\src\ApplicationCore\bin\Debug\netstandard2.0\ApplicationCore.deps.json
+H:\WorkSpace\Projects\HuntTrip\src\ApplicationCore\bin\Debug\netstandard2.0\ApplicationCore.dll
+H:\WorkSpace\Projects\HuntTrip\src\ApplicationCore\bin\Debug\netstandard2.0\ApplicationCore.pdb
+H:\WorkSpace\Projects\HuntTrip\src\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.csproj.CoreCompileInputs.cache
+H:\WorkSpace\Projects\HuntTrip\src\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.AssemblyInfoInputs.cache
+H:\WorkSpace\Projects\HuntTrip\src\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.AssemblyInfo.cs
+H:\WorkSpace\Projects\HuntTrip\src\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.dll
+H:\WorkSpace\Projects\HuntTrip\src\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.pdb
+H:\WorkSpace\Projects\HuntTrip\src\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.csprojAssemblyReference.cache
