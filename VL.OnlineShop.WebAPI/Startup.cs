@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -49,7 +50,7 @@ namespace VL.OnlineShop.WebAPI
                     schema.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
                     schema.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/logout");
                     schema.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/denied");
-                    schema.SlidingExpiration = true;
+                    schema.SlidingExpiration = false;
                     schema.CookieManager = new Microsoft.AspNetCore.Authentication.Cookies.ChunkingCookieManager();
                     schema.Cookie.Name = "vl_access_token";
                     schema.Cookie.HttpOnly = false;
@@ -78,7 +79,7 @@ namespace VL.OnlineShop.WebAPI
                 app.UseHsts();
             }
 
-            //TODO尚未解析具体的机制
+            //尚未解析具体的机制
             app.UseAuthentication();
             app.Map("/login", builder =>
             {
@@ -91,12 +92,11 @@ namespace VL.OnlineShop.WebAPI
                     if (name == "vlong638" && password == "701616")
                     {
                         var claims = new List<System.Security.Claims.Claim>() {
-                            new System.Security.Claims.Claim("name",name)
+                            new System.Security.Claims.Claim(ClaimTypes.Name,name),
+                            new System.Security.Claims.Claim(ClaimTypes.Role,"Admin"),
                         };
                         var identity = new System.Security.Claims.ClaimsIdentity(claims, "password");
                         var principal = new System.Security.Claims.ClaimsPrincipal(identity);
-                        //已过时
-                        //await context.Authentication.SignInAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme, principal);
                         await context.SignInAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme, principal);
                     }
                     else
@@ -105,9 +105,6 @@ namespace VL.OnlineShop.WebAPI
                     }
                 });
             });
-            //过时弃用
-            //app.UseCookieAuthentication(CookieAuthMiddleware.GetOptions());
-
 
             app.UseHttpsRedirection();
             app.UseMvc();

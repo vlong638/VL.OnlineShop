@@ -1,6 +1,9 @@
 ﻿################################################################################
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
+*/obj/
+*/bin/
+*.cache
 
 /.vs/VL.OnlineShop/v15
 /VL.OnlineShop/bin/Debug/netcoreapp2.2/VL.OnlineShop.runtimeconfig.json
@@ -29,4 +32,18 @@
 /VL.OnlineShop.Cmd/obj/Debug/netcoreapp2.2/VL.OnlineShop.Cmd.dll
 /VL.OnlineShop.Cmd/obj/Debug/netcoreapp2.2/VL.OnlineShop.Cmd.pdb
 /VL.OnlineShop.Cmd/obj/VL.OnlineShop.Cmd.csproj.nuget.cache
+/ApplicationCore/obj/Debug/netstandard2.0/ApplicationCore.AssemblyInfoInputs.cache
+/ApplicationCore/obj/Debug/netstandard2.0/ApplicationCore.AssemblyInfo.cs
+/ApplicationCore/obj/Debug/netstandard2.0/ApplicationCore.csproj.CoreCompileInputs.cache
+/ApplicationCore/obj/Debug/netstandard2.0/ApplicationCore.csprojAssemblyReference.cache
+/Infrastructure/obj/Debug/netstandard2.0/Infrastructure.AssemblyInfo.cs
+/Infrastructure/obj/Debug/netstandard2.0/Infrastructure.AssemblyInfoInputs.cache
+/Infrastructure/obj/Debug/netstandard2.0/Infrastructure.csproj.CoreCompileInputs.cache
+/Infrastructure/obj/Debug/netstandard2.0/Infrastructure.csprojAssemblyReference.cache
+/VL.OnlineShop.WebAPI/obj/Debug/netcoreapp2.2/VL.OnlineShop.WebAPI.AssemblyInfo.cs
+/VL.OnlineShop.WebAPI/obj/Debug/netcoreapp2.2/VL.OnlineShop.WebAPI.AssemblyInfoInputs.cache
+/VL.OnlineShop.WebAPI/obj/Debug/netcoreapp2.2/VL.OnlineShop.WebAPI.csproj.CoreCompileInputs.cache
+/VL.OnlineShop.WebAPI/obj/Debug/netcoreapp2.2/VL.OnlineShop.WebAPI.csprojAssemblyReference.cache
+/VL.OnlineShop.WebAPI/obj/Debug/netcoreapp2.2/VL.OnlineShop.WebAPI.RazorAssemblyInfo.cache
+/VL.OnlineShop.WebAPI/obj/Debug/netcoreapp2.2/VL.OnlineShop.WebAPI.RazorAssemblyInfo.cs
 /VL.OnlineShop.WebAPI/obj/Debug/netcoreapp2.2
