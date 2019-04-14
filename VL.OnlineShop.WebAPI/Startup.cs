@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -62,11 +63,26 @@ namespace VL.OnlineShop.WebAPI
                 schema.Cookie.HttpOnly = false;
             });
 
-            //自定义
+            //新增Policy 匿名函数
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(nameof(ClaimTypes.DateOfBirth), policy => policy.RequireAssertion(context => context.User.HasClaim(c => c.Type == ClaimTypes.DateOfBirth)));
+            });
+            //新增Policy 用户组合验证
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(nameof(RoleType.Admin), policy => {
+                    policy
+                    .RequireRole(RoleType.Admin.ToString())
+                    .RequireUserName("vlong638");
+                });
+            });
+            ////新增Policy 自定义处理类
             //services.AddAuthorization(options =>
             //{
-            //    options.AddPolicy("Over16", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
+            //    options.AddPolicy(nameof(VLAgeRequirement), policy => policy.Requirements.Add(new VLAgeRequirement(16)));
             //});
+            //services.AddSingleton<IAuthorizationHandler, VLAgeRequirementHandler>();
         }
 
         /// <summary>

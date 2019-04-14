@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using VL.OnlineShop.WebAPI.Attibutes;
+using VL.OnlineShop.WebAPI.Authorization;
 
 namespace VL.OnlineShop.WebAPI.Controllers
 {
@@ -28,6 +29,10 @@ namespace VL.OnlineShop.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> SignIn(string userName,string password)
         {
+            //TODO 测试用
+            userName = "vlong638";
+            password = "701616";
+
             List<Claim> claims = null;
             ClaimsIdentity identity = null;
             ClaimsPrincipal principal = null;
@@ -40,7 +45,7 @@ namespace VL.OnlineShop.WebAPI.Controllers
                 claims = new List<Claim>() {
                             new Claim(ClaimTypes.Name,userName),
                             new Claim(ClaimTypes.Role,RoleType.Admin.ToString()),
-                            new Claim(ClaimTypes.Role,RoleType.Admin.ToString()),
+                            new Claim(ClaimTypes.DateOfBirth,DateTime.Now.AddYears(-10).ToString()),
                     };
                 identity = new ClaimsIdentity(claims, AuthenticationType.Password.ToString());
                 principal = new ClaimsPrincipal(identity);
@@ -119,17 +124,40 @@ namespace VL.OnlineShop.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 测试
+        /// 测试 单声明
         /// </summary>
         /// <returns></returns>
-        // VLTODO 未测试通过
-        [Route(nameof(TestPolicy))]
+        [Route(nameof(TestPolicy_SinglePolicy))]
         [HttpGet]
-        [Authorize(Policy = "EmployeeOnly")]
-        public ActionResult<string> TestPolicy()
+        [Authorize(Policy = nameof(ClaimTypes.DateOfBirth))]
+        public ActionResult<string> TestPolicy_SinglePolicy()
         {
             return Ok("访问成功");
         }
+
+        /// <summary>
+        /// 测试 多声明
+        /// </summary>
+        /// <returns></returns>
+        [Route(nameof(TestPolicy_MultiplePolicy))]
+        [HttpGet]
+        [Authorize(Policy = nameof(RoleType.Admin))]
+        public ActionResult<string> TestPolicy_MultiplePolicy()
+        {
+            return Ok("访问成功");
+        }
+
+        ///// <summary>
+        ///// 测试 自定义声明
+        ///// </summary>
+        ///// <returns></returns>
+        //[Route(nameof(TestPolicy_CustomPolicy))]
+        //[HttpGet]
+        //[Authorize(Policy = nameof(VLAgeRequirement))]
+        //public ActionResult<string> TestPolicy_CustomPolicy()
+        //{
+        //    return Ok("访问成功");
+        //}
 
         /// <summary>
         /// 测试指定权限
