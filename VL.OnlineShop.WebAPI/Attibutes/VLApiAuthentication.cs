@@ -13,7 +13,6 @@ namespace VL.OnlineShop.WebAPI.Attibutes
     /// </summary>
     public enum FunctionAuthority
     {
-
         #region 组 110
 
         /// <summary>
@@ -78,6 +77,7 @@ namespace VL.OnlineShop.WebAPI.Attibutes
         /// 
         /// </summary>
         private readonly FunctionAuthority[] _functionAuthority;
+        private readonly RoleType[] _roleTypes;
 
         /// <summary>
         /// 
@@ -86,7 +86,16 @@ namespace VL.OnlineShop.WebAPI.Attibutes
         public VLApiAuthentication(params FunctionAuthority[] functionAuthority) : base()
         {
             _functionAuthority = functionAuthority;
-            Policy = functionAuthority.ToPolicy();
+            //Policy = functionAuthority.ToPolicy();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public VLApiAuthentication(params RoleType[] roleType) : base()
+        {
+            _roleTypes = roleType;
+            //Policy = _roleTypes.ToPolicy();
         }
     }
 }

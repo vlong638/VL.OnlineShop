@@ -44,21 +44,29 @@ namespace VL.OnlineShop.WebAPI
 
             //Auth2.0 
             services.AddIdentity<ApplicationUser, Microsoft.AspNetCore.Identity.IdentityRole>();
-            services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(schema =>
-                {
-                    schema.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
-                    schema.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/logout");
-                    schema.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/denied");
-                    schema.SlidingExpiration = false;
-                    schema.CookieManager = new Microsoft.AspNetCore.Authentication.Cookies.ChunkingCookieManager();
-                    schema.Cookie.Name = "vl_access_token";
-                    schema.Cookie.HttpOnly = false;
-                });
-            services.AddAuthorization(options =>
+            //services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)
+            services.AddAuthentication(auth =>
             {
-                options.AddPolicy("Over16", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
+                auth.DefaultAuthenticateScheme = Constants.VLSchema;
+                auth.DefaultChallengeScheme = Constants.VLSchema;
+                auth.DefaultSignInScheme = Constants.VLSchema;
+            })
+            .AddCookie(schema =>
+            {
+                schema.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
+                schema.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/logout");
+                schema.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/denied");
+                schema.SlidingExpiration = false;
+                schema.CookieManager = new Microsoft.AspNetCore.Authentication.Cookies.ChunkingCookieManager();
+                schema.Cookie.Name = "vl_access_token";
+                schema.Cookie.HttpOnly = false;
             });
+
+            //自定义
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Over16", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
+            //});
         }
 
         /// <summary>
@@ -79,35 +87,35 @@ namespace VL.OnlineShop.WebAPI
                 app.UseHsts();
             }
 
-            //尚未解析具体的机制
+            //使用中间件
             app.UseAuthentication();
-            app.Map("/login", builder =>
-            {
-                builder.Run(async context =>
-                {
-                    //测试快捷地址
-                    //https://localhost:44360/login?name=vlong638&password=701616
-                    var name = context.Request.Query["name"];
-                    var password = context.Request.Query["password"];
-                    if (name == "vlong638" && password == "701616")
-                    {
-                        var claims = new List<System.Security.Claims.Claim>() {
-                            new System.Security.Claims.Claim(ClaimTypes.Name,name),
-                            new System.Security.Claims.Claim(ClaimTypes.Role,"Admin"),
-                        };
-                        var identity = new System.Security.Claims.ClaimsIdentity(claims, "password");
-                        var principal = new System.Security.Claims.ClaimsPrincipal(identity);
-                        await context.SignInAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                    }
-                    else
-                    {
-                        await context.SignOutAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme);
-                    }
-                });
-            });
-
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            //app.Map("/login", builder =>
+            //{
+            //    builder.Run(async context =>
+            //    {
+            //        //测试快捷地址
+            //        //https://localhost:44360/login?name=vlong638&password=701616
+            //        var name = context.Request.Query["name"];
+            //        var password = context.Request.Query["password"];
+            //        if (name == "vlong638" && password == "701616")
+            //        {
+            //            var claims = new List<System.Security.Claims.Claim>() {
+            //                new System.Security.Claims.Claim(ClaimTypes.Name,name),
+            //                new System.Security.Claims.Claim(ClaimTypes.Role,"Admin"),
+            //            };
+            //            var identity = new System.Security.Claims.ClaimsIdentity(claims, "password");
+            //            var principal = new System.Security.Claims.ClaimsPrincipal(identity);
+            //            await context.SignInAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            //        }
+            //        else
+            //        {
+            //            await context.SignOutAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme);
+            //        }
+            //    });
+            //});
 
             //启用中间件服务生成Swagger作为JSON终结点
             app.UseSwagger();

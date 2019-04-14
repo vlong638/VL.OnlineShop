@@ -205,7 +205,7 @@
   },
   "libraries": {
     "Ardalis.GuardClauses/1.2.3": {
-      "sha512": "xrzu9EBTQVg75dorn3TSYZIwDLTGOLf2l49C6lHOHeXRHn975+Zk10Qa+UsqhLW+FUp5gGD/axgusrxYt09hSg==",
+      "sha512": "vbseGD73Uo7zqeX0vYyEVDv3EWn4AMA3X+D8otpxn5GLPeXQjkVIw/ITUMAzco72EAHDogy2T4UQtq99Dt8Pug==",
       "type": "package",
       "path": "ardalis.guardclauses/1.2.3",
       "files": [
@@ -218,7 +218,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
+      "sha512": "a/iSwnRZb+LHFk49hQOyThh/ZNC3vsbZsF65XwQIb863qF6msmhdQtxGXFL28Ob2NsCz/drEj28BJd/YPpLRBg==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
@@ -442,7 +442,7 @@
       ]
     },
     "System.ComponentModel.Annotations/4.5.0": {
-      "sha512": "IjDa643EO77A4CL9dhxfZ6zzGu+pM8Ar0NYPRMN3TvDiga4uGDzFHOj/ArpyNxxKyO5IFT2LZ0rK3kUog7g3jA==",
+      "sha512": "UxYQ3FGUOtzJ7LfSdnYSFd7+oEv6M8NgUatatIN2HxNtDdlcvFAf+VIq4Of9cDMJEJC0aSRv/x898RYhB4Yppg==",
       "type": "package",
       "path": "system.componentmodel.annotations/4.5.0",
       "files": [
@@ -1280,23 +1280,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\greed\\.nuget\\packages\\": {},
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repository\\VL.OnlineShop\\ApplicationCore\\ApplicationCore.csproj",
+      "projectUniqueName": "H:\\WorkSpace\\Projects\\VL.OnlineShop2\\VL.OnlineShop\\ApplicationCore\\ApplicationCore.csproj",
       "projectName": "ApplicationCore",
-      "projectPath": "D:\\Repository\\VL.OnlineShop\\ApplicationCore\\ApplicationCore.csproj",
-      "packagesPath": "C:\\Users\\greed\\.nuget\\packages\\",
-      "outputPath": "D:\\Repository\\VL.OnlineShop\\ApplicationCore\\obj\\",
+      "projectPath": "H:\\WorkSpace\\Projects\\VL.OnlineShop2\\VL.OnlineShop\\ApplicationCore\\ApplicationCore.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "H:\\WorkSpace\\Projects\\VL.OnlineShop2\\VL.OnlineShop\\ApplicationCore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\greed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1304,7 +1304,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://nuget.xiaobao100.cn/nuget/xiaobao": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
