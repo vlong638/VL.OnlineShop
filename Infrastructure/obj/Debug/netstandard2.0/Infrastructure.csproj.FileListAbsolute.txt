@@ -22,3 +22,15 @@ H:\WorkSpace\Projects\VL.OnlineShop2\VL.OnlineShop\Infrastructure\obj\Debug\nets
 H:\WorkSpace\Projects\VL.OnlineShop2\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.csproj.CopyComplete
 H:\WorkSpace\Projects\VL.OnlineShop2\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.dll
 H:\WorkSpace\Projects\VL.OnlineShop2\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.pdb
+D:\Repository\VL.OnlineShop\Infrastructure\bin\Debug\netstandard2.0\Infrastructure.deps.json
+D:\Repository\VL.OnlineShop\Infrastructure\bin\Debug\netstandard2.0\Infrastructure.dll
+D:\Repository\VL.OnlineShop\Infrastructure\bin\Debug\netstandard2.0\Infrastructure.pdb
+D:\Repository\VL.OnlineShop\Infrastructure\bin\Debug\netstandard2.0\ApplicationCore.dll
+D:\Repository\VL.OnlineShop\Infrastructure\bin\Debug\netstandard2.0\ApplicationCore.pdb
+D:\Repository\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.csprojAssemblyReference.cache
+D:\Repository\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.csproj.CoreCompileInputs.cache
+D:\Repository\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.AssemblyInfoInputs.cache
+D:\Repository\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.AssemblyInfo.cs
+D:\Repository\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.csproj.CopyComplete
+D:\Repository\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.dll
+D:\Repository\VL.OnlineShop\Infrastructure\obj\Debug\netstandard2.0\Infrastructure.pdb

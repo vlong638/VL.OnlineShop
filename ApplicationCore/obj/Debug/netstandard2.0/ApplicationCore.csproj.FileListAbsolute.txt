@@ -16,3 +16,12 @@ H:\WorkSpace\Projects\VL.OnlineShop2\VL.OnlineShop\ApplicationCore\obj\Debug\net
 H:\WorkSpace\Projects\VL.OnlineShop2\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.AssemblyInfo.cs
 H:\WorkSpace\Projects\VL.OnlineShop2\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.dll
 H:\WorkSpace\Projects\VL.OnlineShop2\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.pdb
+D:\Repository\VL.OnlineShop\ApplicationCore\bin\Debug\netstandard2.0\ApplicationCore.deps.json
+D:\Repository\VL.OnlineShop\ApplicationCore\bin\Debug\netstandard2.0\ApplicationCore.dll
+D:\Repository\VL.OnlineShop\ApplicationCore\bin\Debug\netstandard2.0\ApplicationCore.pdb
+D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.csprojAssemblyReference.cache
+D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.csproj.CoreCompileInputs.cache
+D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.AssemblyInfoInputs.cache
+D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.AssemblyInfo.cs
+D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.dll
+D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.pdb
