@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace VL.OnlineShop.WebAPI.Attibutes
 {
-    /*权限枚举值规则：前三位为分组，后三位为组内编号*/
-
     /// <summary>
-    /// 
+    /// 权限枚举值规则：前三位为分组，后三位为组内编号
     /// </summary>
     public enum FunctionAuthority
     {

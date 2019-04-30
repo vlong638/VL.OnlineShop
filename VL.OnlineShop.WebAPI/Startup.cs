@@ -77,12 +77,12 @@ namespace VL.OnlineShop.WebAPI
                     .RequireUserName("vlong638");
                 });
             });
-            ////新增Policy 自定义处理类
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy(nameof(VLAgeRequirement), policy => policy.Requirements.Add(new VLAgeRequirement(16)));
-            //});
-            //services.AddSingleton<IAuthorizationHandler, VLAgeRequirementHandler>();
+            //新增Policy 自定义处理类
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(nameof(VLAgeRequirement), policy => policy.Requirements.Add(new VLAgeRequirement(16)));
+            });
+            services.AddSingleton<IAuthorizationHandler, VLAgeRequirementHandler>();
         }
 
         /// <summary>
@@ -108,6 +108,7 @@ namespace VL.OnlineShop.WebAPI
             app.UseHttpsRedirection();
             app.UseMvc();
 
+            #region login
             //app.Map("/login", builder =>
             //{
             //    builder.Run(async context =>
@@ -131,7 +132,8 @@ namespace VL.OnlineShop.WebAPI
             //            await context.SignOutAsync(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme);
             //        }
             //    });
-            //});
+            //}); 
+            #endregion
 
             //启用中间件服务生成Swagger作为JSON终结点
             app.UseSwagger();

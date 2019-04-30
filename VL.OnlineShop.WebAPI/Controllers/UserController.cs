@@ -147,17 +147,18 @@ namespace VL.OnlineShop.WebAPI.Controllers
             return Ok("访问成功");
         }
 
-        ///// <summary>
-        ///// 测试 自定义声明
-        ///// </summary>
-        ///// <returns></returns>
-        //[Route(nameof(TestPolicy_CustomPolicy))]
-        //[HttpGet]
-        //[Authorize(Policy = nameof(VLAgeRequirement))]
-        //public ActionResult<string> TestPolicy_CustomPolicy()
-        //{
-        //    return Ok("访问成功");
-        //}
+        /// <summary>
+        /// 测试 自定义声明
+        /// </summary>
+        /// <returns></returns>
+        // VLTODO 未测试通过
+        [Route(nameof(TestPolicy_CustomPolicy))]
+        [HttpGet]
+        [Authorize(Policy = nameof(VLAgeRequirement))]
+        public ActionResult<string> TestPolicy_CustomPolicy()
+        {
+            return Ok("访问成功");
+        }
 
         /// <summary>
         /// 测试指定权限

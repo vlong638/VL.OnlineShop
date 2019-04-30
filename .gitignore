@@ -4,6 +4,7 @@
 */obj/
 */bin/
 *.cache
+*.assets.cache
 
 /.vs/VL.OnlineShop/v15
 /VL.OnlineShop/bin/Debug/netcoreapp2.2/VL.OnlineShop.runtimeconfig.json
