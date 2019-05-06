@@ -24,3 +24,4 @@ D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\Application
 D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.AssemblyInfo.cs
 D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.dll
 D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.pdb
+D:\Repository\VL.OnlineShop\ApplicationCore\obj\Debug\netstandard2.0\ApplicationCore.csprojAssemblyReference.cache
