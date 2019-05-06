@@ -29,6 +29,37 @@ namespace VL.ORM.Dapper.DapperEntities
             this.connection = connection;
         }
 
+        /// <inheritdoc />
+        public bool Delete(TEntity entity)
+        {
+            return connection.Delete(entity);
+        }
+
+        /// <inheritdoc />
+        public TEntity GetById(long id)
+        {
+            return connection.Get<TEntity>(id);
+        }
+
+        /// <inheritdoc />
+        public long Insert(TEntity entity)
+        {
+            return connection.Insert(entity);
+        }
+
+        /// <inheritdoc />
+        public long Insert(TEntity[] entities)
+        {
+            return connection.Insert(entities);
+        }
+
+        /// <inheritdoc />
+        public bool Update(TEntity entity)
+        {
+            return connection.Update(entity);
+        }
+
+
         ///// <inheritdoc />
         //public bool ConcurrentUpdate(TEntity entity)
         //{
@@ -60,99 +91,69 @@ namespace VL.ORM.Dapper.DapperEntities
         //    return Delete(obj);
         //}
 
-        /// <inheritdoc />
-        public bool Delete(TEntity entity)
-        {
-            return connection.Delete(entity);
-        }
+        ///// <inheritdoc />
+        //public IEnumerable<TEntity> GetByIds(long[] ids)
+        //{
+        //    return connection.Query<TEntity>($" select *  from {typeof(TEntity).Name} where user_id in @ids ;", new { ids });
+        //}
 
-        /// <inheritdoc />
-        public TEntity GetById(long id)
-        {
-            return connection.Get<TEntity>(id);
-        }
+        ///// <inheritdoc />
+        //public TEntity GetByIdAndOrgId(long id, long orgId)
+        //{
+        //    return connection.Query<TEntity>($" select *  from {typeof(TEntity).Name} where id=@Id and orgId = @orgId ", new { Id = id, orgId = orgId }).FirstOrDefault();
+        //}
 
-        /// <inheritdoc />
-        public IEnumerable<TEntity> GetByIds(long[] ids)
-        {
-            return connection.Query<TEntity>($" select *  from {typeof(TEntity).Name} where user_id in @ids ;", new { ids });
-        }
+        ///// <inheritdoc />
+        //public int UpdateWithColumnsById<TEnity>(Dictionary<string, object> dict, long id)
+        //{
+        //    var columns = new StringBuilder();
+        //    var parameters = new DynamicParameters(new { });
 
-        /// <inheritdoc />
-        public TEntity GetByIdAndOrgId(long id, long orgId)
-        {
-            return connection.Query<TEntity>($" select *  from {typeof(TEntity).Name} where id=@Id and orgId = @orgId ", new { Id = id, orgId = orgId }).FirstOrDefault();
-        }
+        //    foreach (var item in dict)
+        //    {
+        //        columns.Append(item.Key + "=@" + item.Key + ",");
+        //        parameters.Add("@" + item.Key, item.Value);
+        //    }
+        //    parameters.Add("@Id", id);
+        //    var substring = columns.ToString().Substring(0, columns.ToString().Length - 1);
+        //    var sql = $"update {typeof(TEntity).Name} set { substring } where id=@Id ";
+        //    return connection.Execute(sql, parameters);
+        //}
 
-        /// <inheritdoc />
-        public int UpdateWithColumnsById<TEnity>(Dictionary<string, object> dict, long id)
-        {
-            var columns = new StringBuilder();
-            var parameters = new DynamicParameters(new { });
+        //private string GetConcurrentUpdateSql(TypeMapper typeMapper)
+        //{
+        //    string sql = string.Empty;
+        //    var entityType = typeof(TEntity);
+        //    if (!typeConcurrentUpdateSqlcache.TryGetValue(entityType, out sql))
+        //    {
+        //        var columnBuilder = typeMapper.Properties.Aggregate(new StringBuilder(), (sb, property) => (property.Name == "RowVersion" ? sb.AppendFormat("{0}=@{0}+1,", property.Name) : sb.AppendFormat("{0}=@{0},", property.Name)));
+        //        var columns = columnBuilder.Remove(columnBuilder.Length - 1, 1);
+        //        //var sb = new StringBuilder();
 
-            foreach (var item in dict)
-            {
-                columns.Append(item.Key + "=@" + item.Key + ",");
-                parameters.Add("@" + item.Key, item.Value);
-            }
-            parameters.Add("@Id", id);
-            var substring = columns.ToString().Substring(0, columns.ToString().Length - 1);
-            var sql = $"update {typeof(TEntity).Name} set { substring } where id=@Id ";
-            return connection.Execute(sql, parameters);
-        }
+        //        sql = string.Format("update {0} set {1} where id=@Id and rowversion=@RowVersion;", typeMapper.Name, columns);
+        //        typeConcurrentUpdateSqlcache.TryAdd(entityType, sql);
+        //    }
+        //    return sql;
+        //}
 
-        /// <inheritdoc />
-        public long Insert(TEntity entity)
-        {
-            return connection.Insert(entity);
-        }
+        //private static TypeMapper GetEntityMapper()
+        //{
+        //    var entityType = typeof(TEntity);
+        //    var properties = entityType.GetProperties();
 
-        /// <inheritdoc />
-        public long Insert(TEntity[] entities)
-        {
-            return connection.Insert(entities);
-        }
+        //    if (!typecache.TryGetValue(entityType, out TypeMapper typeMapper))
+        //    {
+        //        typeMapper = new TypeMapper()
+        //        {
+        //            Name = nameof(entityType),
+        //            Properties = properties
+        //        };
 
-        /// <inheritdoc />
-        public bool Update(TEntity entity)
-        {
-            return connection.Update(entity);
-        }
+        //        typecache.TryAdd(entityType, typeMapper);
+        //    }
 
-        private string GetConcurrentUpdateSql(TypeMapper typeMapper)
-        {
-            string sql = string.Empty;
-            var entityType = typeof(TEntity);
-            if (!typeConcurrentUpdateSqlcache.TryGetValue(entityType, out sql))
-            {
-                var columnBuilder = typeMapper.Properties.Aggregate(new StringBuilder(), (sb, property) => (property.Name == "RowVersion" ? sb.AppendFormat("{0}=@{0}+1,", property.Name) : sb.AppendFormat("{0}=@{0},", property.Name)));
-                var columns = columnBuilder.Remove(columnBuilder.Length - 1, 1);
-                //var sb = new StringBuilder();
-
-                sql = string.Format("update {0} set {1} where id=@Id and rowversion=@RowVersion;", typeMapper.Name, columns);
-                typeConcurrentUpdateSqlcache.TryAdd(entityType, sql);
-            }
-            return sql;
-        }
-
-        private static TypeMapper GetEntityMapper()
-        {
-            var entityType = typeof(TEntity);
-            var properties = entityType.GetProperties();
-
-            if (!typecache.TryGetValue(entityType, out TypeMapper typeMapper))
-            {
-                typeMapper = new TypeMapper()
-                {
-                    Name = nameof(entityType),
-                    Properties = properties
-                };
-
-                typecache.TryAdd(entityType, typeMapper);
-            }
-
-            return typeMapper;
-        }
+        //    return typeMapper;
+        //}
     }
 
     class TypeMapper
