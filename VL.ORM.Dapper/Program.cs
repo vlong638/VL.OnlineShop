@@ -16,6 +16,10 @@ namespace VL.ORM.Dapper
 
         static void Main(string[] args)
         {
+            //any()不包含null处理
+            List<int> iis = null;
+            bool iisNull = iis.Any();
+
             Insert();
             var user = Query();
             var result_u = Update();
